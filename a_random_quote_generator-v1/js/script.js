@@ -6,51 +6,105 @@ project 1 - A Random Quote Generator
 // Study guide for this project - https://drive.google.com/file/d/1s5grutGuQFwJcQP8bFwEI69Q8FCkGdDk/view?usp=sharing
 
 
-/*** 
-  Create the array of quote objects and name it `quotes`.
-  Add at least five quote objects to the `quotes` array.
-  Give each quote object a `quote` and `source` property.
-  Add the `citation` property to at least one object in the array.
-  Add the `year` property to at least one object in the array.
-  Use console.log() to log your array of quotes to the console.
-***/
+// array of quotes objects, objects having the a quote and source property and some with citation and year property.
+
+var quotes = [
+  {
+      quote: "We delight in the beauty of the butterfly, but rarely admit the changes it has gone through to achieve that beauty.", 
+      source: "Maya Angelou"
+  },
+  {
+      quote: "It's not the load that breaks you down, it's the way you carry it.",
+      source: "Lou Holtz"
+
+  },
+  {
+      quote: "I’ve learned that people will forget what you said, people will forget what you did, but people will never forget how you made them feel.",
+      source: "Maya Angelou"
+
+  },
+  {
+      quote: "And now here is my secret, a very simple secret: It is only with the heart that one can see rightly; what is essential is invisible to the eye.",
+      source: "Antoine de Saint-Exupéry",
+      citation: "The Little Prince"
+  },
+  {
+      quote: "If you're reading this...Congratulations, you're alive.If that's not something to smile about,then I don't know what is.",
+      source: "Chad Sugg",
+      citation: "Monsters Under Your Head"
+
+  },
+  {
+      quote: "The two most imporDo, or do not. There is no 'try'.",
+      source: "Yoda",
+      citation: "The Empire Strikes Back",
+      year: "1980"
+  },
+  {
+      quote: "Whatever you can do, or dream you can, begin it.  Boldness has genius, power and magic in it.",
+      source: "Johann Wolfgang von Goethe"
+  },
+  {
+      quote: "The best revenge is massive success.",
+      source: "Frank Sinatra"
+  }
+];
+
+
+//obtain random quote object from quotes array.
+
+function getRandomQuote() {
+
+  var randomNumber = Math.floor(Math.random() * quotes.length ); //returns a random integer upto the length of the array
+    
+  var randomQuoteObj = quotes[randomNumber];
+
+  return randomQuoteObj;
+ }
+
+
+// create random background color function 
+
+ function random_bg_color() {
+   var x = Math.floor(Math.random() * 256);
+   var y = Math.floor(Math.random() * 256);
+   var z = Math.floor(Math.random() * 256);
+
+   var bgColor = "rgb(" + x + "," + y + "," + z + ")";
+   return bgColor;
+  }
+// create and print a random quote string to the browser with random background color by calling the random color function.
+
+  function printQuote() {
+
+   var randomQuote = getRandomQuote();
+   var htmlStr = '';
+
+   htmlStr = '<p class="quote"> ' + randomQuote.quote +  '</p>';
+   htmlStr+= '<p class="source">' + randomQuote.source;
+
+  if(randomQuote.citation) {
+    htmlStr+= '<span class="citation"> ' + randomQuote.citation + '</span>';
+   }
+
+  if (randomQuote.year) {
+    htmlStr += '<span class="year">' + randomQuote.year + '</span>';
+   }
+
+    htmlStr += '</p>';
+
+  //manipulate the DOM and update the selected div with the new elements created above
+  var div = document.getElementById('quote-box');
+  div.innerHTML = htmlStr;
+   
+  document.body.style.background = random_bg_color();
+
+}
+
+setInterval(printQuote, 30000 );
+
+// Show another quote button when clicked will show a different quote.
+  document.getElementById('loadQuote').addEventListener("click", printQuote, false) ;
 
 
 
-
-/***
-  Create the `getRandomQuote` function to:
-   - Create a variable to store a random number 
-   - Cse the random number to `return` a random quote object from the `quotes` array.
-***/
-
-
-
-
-/***
-  Create the `printQuote` function to: 
-   - Call the `getRandomQuote` function and assign it to a variable.
-   - Create a variable for the HTML string and set it equal to an empty string.
-   - Use the HTML template in the instructions or the markup in the index.html file, AND 
-     the random quote vairable to build your HTML string.
-   - Add the quote and source section to the HTML string.
-   - Use an if statement to check for the citation property before adding it to the HTML string.
-   - Use an if statement to check for the year property before adding it to the HTML string.
-   - Don't forget to close that final `p` tag.
-   - Set the `innerHTML` of the `quote-box` div to the HTML string. 
-***/
-
-
-
-
-/***
-  When the "Show another quote" button is clicked, the event listener 
-  below will be triggered, and it will call, or "invoke", the `printQuote` 
-  function. So do not make any changes to the line of code below this 
-  comment.
-***/
-
-document.getElementById('loadQuote').addEventListener("click", printQuote, false);
-
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
